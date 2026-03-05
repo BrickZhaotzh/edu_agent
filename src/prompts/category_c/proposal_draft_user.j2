@@ -1,0 +1,17 @@
+## 任务：撰写教学方案稿
+
+**需求描述：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请根据以上信息，撰写一份完整的教学方案稿，包含课程信息、教学目标、教学重难点、教学准备、教学流程（含时间分配）、板书设计、教学反思要点等核心要素。

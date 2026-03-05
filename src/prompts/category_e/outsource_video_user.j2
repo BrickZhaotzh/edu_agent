@@ -1,0 +1,38 @@
+## 外包视频制作需求文档任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请生成完整的外包视频制作需求文档，包含：
+1. **项目概述**：项目背景、目标受众、视频用途
+2. **创意Brief**：视频风格、调性、参考案例链接
+3. **内容脚本大纲**：章节划分、每段核心信息点
+4. **技术规格要求**：分辨率、帧率、码率、时长、字幕规范、配音要求
+5. **视觉要求**：品牌色、logo使用规范、字体规范
+6. **交付物清单**：成品文件格式、源文件、字幕文件等
+7. **项目排期**：里程碑节点与交付时间线
+8. **验收标准**：逐项可操作的验收条件
+9. **预算参考**：制作复杂度评估与市场参考价格区间
+
+请以正式项目文档格式输出。

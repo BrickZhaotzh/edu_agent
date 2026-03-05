@@ -1,0 +1,41 @@
+# 全局配置
+llm:
+  provider: zhipuai
+  model: glm-4.7
+  temperature: 0.7
+  max_tokens: 8192
+  top_p: 0.9
+  stream: true
+
+# 知识库配置
+knowledge:
+  policies_dir: src/knowledge/policies
+  competitor_reports_dir: src/knowledge/competitor_reports
+  chunk_size: 2000
+  top_k: 5
+
+# 文档导出配置
+document:
+  output_dir: output
+  default_format: markdown
+  word_template: null
+
+# Streamlit 配置
+app:
+  title: 科创课程AI智能体平台
+  page_icon: "🔬"
+  layout: wide
+
+# 工作流编排配置
+workflow:
+  storage_dir: output/workflows
+  max_nodes: 20
+
+# 云端知识库配置（智谱AI retrieval）
+cloud_knowledge:
+  enabled: true
+  prompt_template: "从文档:\n{{knowledge}}\n回答:\n{{question}}"
+  fallback_to_local: true
+  mapping:
+    科创教育专家知识库: "2029383260794212352"
+    科学知识库: "2029457114669383680"

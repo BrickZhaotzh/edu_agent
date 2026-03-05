@@ -1,0 +1,17 @@
+## 任务：设计课后作业
+
+**需求描述：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请根据以上信息，设计一套分层课后作业，包含基础巩固、能力提升和拓展创新三个层次。每道题标注对应知识点、难度等级和预计完成时间，并提供参考答案。

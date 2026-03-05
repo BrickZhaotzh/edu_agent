@@ -1,0 +1,17 @@
+## 任务：拼音标注
+
+**需求描述：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请为以上文本内容添加准确的拼音标注。注意多音字需根据语境选择正确读音，英文和数字无需标注。输出格式为每个汉字附带拼音标注。

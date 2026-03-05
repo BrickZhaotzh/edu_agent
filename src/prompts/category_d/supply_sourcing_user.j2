@@ -1,0 +1,35 @@
+## 学具寻源任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请提供学具/教具的供应商寻源与采购建议，包含：
+1. **供应商渠道推荐**：线上平台、线下渠道、厂商直供，标注搜索关键词
+2. **品牌对比分析**：主流品牌的产品线、价格区间、口碑评价
+3. **采购方案**：批量采购与零散采购的成本对比
+4. **成本优化建议**：替代方案、DIY方案、复用策略
+5. **供应商评估要素**：资质认证、售后服务、交货周期、定制能力
+6. **采购风险提示**：质量风险、供货风险、合规风险
+
+请以对比表格 + 推荐排序的形式呈现。

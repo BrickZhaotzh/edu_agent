@@ -1,0 +1,17 @@
+## 任务：生成教学设计文档
+
+**需求描述：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请根据以上信息，生成一份完整的教学设计文档，包含课程基本信息、学情分析、教学目标（三维目标）、教学重难点、教法与学法、教学过程（含时间分配）、板书设计、作业设计、教学反思框架。

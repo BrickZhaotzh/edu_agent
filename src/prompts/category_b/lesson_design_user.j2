@@ -1,0 +1,49 @@
+## 单节课时设计任务
+
+### 基本信息
+- **单元名称**: {{ input.unit_name }}
+- **课时主题**: {{ input.lesson_topic }}
+- **第几课时**: 第{{ input.lesson_number }}课时
+- **时长**: {{ input.duration_minutes }}分钟
+
+### 用户需求
+{{ input.query }}
+
+{% if upstream is defined and upstream %}
+### 上游Agent输出（B1.5 课程大纲）
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请输出完整的单节课时教学设计方案，包含：
+
+1. **课时基本信息**
+   - 主题、学段、对齐课标条目、所属单元
+2. **教学目标**（3-5条）
+   - 知识与技能、过程与方法、情感态度与价值观
+3. **教学重难点**
+4. **教学准备**
+   - 教师准备、学生准备、技术环境
+5. **教学过程**（精确到分钟）
+   - 每个环节：时间 | 教师活动 | 学生活动 | 设计意图
+   - 包含导入、新授、实践、总结等环节
+6. **课堂评价**
+   - 评价时机、评价方式、评价标准
+7. **作业/延伸**
+8. **板书/PPT设计要点**
+9. **教学反思预设**

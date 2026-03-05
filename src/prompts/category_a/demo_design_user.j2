@@ -1,0 +1,65 @@
+请设计一节Demo示范课：
+
+## 课程基本信息
+- **课程主题**：{{ input.course_topic }}
+- **目标学段**：{{ input.target_grade }}
+- **课时长度**：{{ input.duration_minutes | default(45, true) }}分钟
+
+## 用户需求
+{{ input.query }}
+
+{% if knowledge and knowledge.course_examples %}
+## 参考课例
+{{ knowledge.course_examples }}
+{% else %}
+## 参考课例
+（无已有课例参考，请基于教学设计经验进行原创设计）
+{% endif %}
+
+{% if upstream %}
+## 上游分析结果
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+{% set duration = input.duration_minutes | default(45, true) | int %}
+请按以下结构输出Demo课设计方案：
+
+### 一、课程概述
+1. 主题说明与课程定位
+2. 学情分析（目标学段学生的认知水平与前置知识）
+3. 教学目标（知识与技能/过程与方法/情感态度价值观）
+
+### 二、教学设计
+按时间线规划完整教学流程：
+
+1. **导入环节**（约{{ (duration / 9) | round | int }}分钟）
+   - 情境创设 / 问题引入 / 兴趣激发
+
+2. **新知讲授**（约{{ (duration / 3) | round | int }}分钟）
+   - 核心概念讲解
+   - 演示与示范
+
+3. **实践操作**（约{{ (duration / 3) | round | int }}分钟）
+   - 动手实验 / 编程实践 / 项目任务
+   - 分组合作安排
+
+4. **展示交流**（约{{ (duration / 9) | round | int }}分钟）
+   - 学生成果展示
+   - 互评与讨论
+
+5. **总结拓展**（约{{ (duration / 9) | round | int }}分钟）
+   - 知识总结与思维导图
+   - 课后拓展任务
+
+### 三、教学资源清单
+- 软件工具（编程平台、演示软件等）
+- 硬件设备（如需要）
+- 教学素材（课件、视频、示例代码等）
+
+### 四、评价设计
+- 过程性评价要点
+- 成果评价标准
+
+### 五、教学反思预设
+- 可能遇到的教学难点及应对策略
+- 差异化教学建议

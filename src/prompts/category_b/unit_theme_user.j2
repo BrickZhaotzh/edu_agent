@@ -1,0 +1,45 @@
+## 单元主题架构设计任务
+
+### 基本信息
+- **课程名称**: {{ input.course_name }}
+- **单元总数**: {{ input.total_units }}
+
+{% if input.standard_mapping %}
+### 课标映射信息（来自B1.2）
+{{ input.standard_mapping | tojson(indent=2) }}
+{% endif %}
+
+### 用户需求
+{{ input.query }}
+
+{% if upstream is defined and upstream %}
+### 上游Agent输出（B1.2 课标教材匹配结果）
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请设计 {{ input.total_units }} 个单元的主题架构，每个单元包含：
+1. **单元编号与名称**
+2. **核心概念/大概念（Big Idea）**
+3. **驱动性问题（Essential Question）**
+4. **学习目标**（知识目标 + 素养目标）
+5. **对齐课标条目**
+6. **建议课时数**
+7. **与前后单元的逻辑关系**
+
+最后请提供单元间的知识图谱/逻辑递进关系概述。

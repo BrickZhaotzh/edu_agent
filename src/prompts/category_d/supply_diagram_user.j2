@@ -1,0 +1,35 @@
+## 教具示意图描述任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请为每项教具/学具生成详细的示意图文字描述，包含：
+1. **外观描述**：整体外观、尺寸比例、颜色配色方案
+2. **结构分解图说明**：各组成部分的名称、位置、连接方式
+3. **关键细节标注**：接口类型、传感器位置、操作按钮等
+4. **组装示意说明**：分步骤的组装顺序与要点
+5. **使用场景图说明**：教具在课堂中的使用状态描述
+6. **AI绘图提示词**：可用于Midjourney/DALL-E等工具的英文提示词
+
+每项描述应包含正面图、侧面图、爆炸图（结构分解）三个视角。

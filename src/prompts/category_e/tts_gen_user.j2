@@ -1,0 +1,34 @@
+## 语音合成脚本任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请将原始文本转换为TTS语音合成脚本，包含：
+1. **TTS优化脚本**：数字/缩写/专有名词读音标注、停顿标记、语气标注
+2. **分段脚本**：按教学环节拆分，每段标注预估时长
+3. **TTS配置参数**：推荐音色、语速、音量与音调参数
+4. **SSML标记版本**：带SSML标签的脚本（兼容主流TTS引擎）
+5. **质检要点**：需人工复核的关键发音与语气要点
+
+请先输出纯文本优化版，再输出SSML标记版。

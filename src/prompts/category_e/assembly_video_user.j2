@@ -1,0 +1,41 @@
+## 学具搭建视频脚本任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请生成学具搭建/组装视频的完整脚本，包含：
+1. **视频大纲**：整体结构与预计总时长
+2. **材料清点环节**：开场展示所有零部件与工具的脚本
+3. **分步骤搭建脚本**（每步包含）：
+   - 步骤编号与标题
+   - 操作说明（具体动作描述）
+   - 旁白文案（口播内容）
+   - 画面指导（机位、特写、标注）
+   - 预计耗时
+   - 常见错误与提醒
+4. **安全提示**：涉及安全风险的步骤标注注意事项
+5. **完成效果展示**：搭建完成后的功能演示脚本
+6. **拍摄建议**：推荐机位、灯光布置、特写需求、字幕标注
+
+脚本应适合学生跟随操作，语言通俗易懂。

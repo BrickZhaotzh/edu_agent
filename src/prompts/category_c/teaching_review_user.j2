@@ -1,0 +1,17 @@
+## 任务：教学内容审核
+
+**待审核内容：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请对以上教学内容进行全方位审核，输出审核报告，包含：审核总评、各维度评分（科学准确性、教学规范性、课标对齐度、语言表达、学段适切性）、具体问题清单（含位置、问题描述、严重程度和修改建议）、审核总结。

@@ -1,0 +1,38 @@
+## 宣传海报文案任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请提供3套不同风格的海报文案方案，每套包含：
+1. **主标题**（10字以内，有冲击力）
+2. **副标题**（20字以内，补充说明）
+3. **核心卖点**（3-4个短句，每句8字以内）
+4. **课程信息区**：适用年级、课时数、上课形式
+5. **行动号召**（CTA）：报名引导文案
+6. **视觉风格建议**：配色方案、主视觉元素、整体调性
+
+风格方向：
+- 方案A：专业权威型（课标对齐、师资实力）
+- 方案B：趣味吸引型（动手实操、科技酷炫）
+- 方案C：家长痛点型（升学价值、能力培养）

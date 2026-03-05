@@ -1,0 +1,45 @@
+## Demo课交付包装任务
+
+### 用户需求
+{{ input.query }}
+
+{% if upstream is defined and upstream %}
+### 上游参考数据
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请输出完整的Demo课交付方案，包含：
+
+1. **Demo课概述**
+   - 课程名称、目标受众（校长/教研员/教师/家长）、时长
+2. **核心卖点提炼**（3-5个）
+   - 每个卖点用一句话概括 + 对应的课堂展示环节
+3. **Demo课教学流程**
+   - 精炼版教学设计（每环节含时间、活动、亮点标注）
+   - 重点标注"WOW Moment"——让观众印象深刻的环节
+4. **学生互动体验设计**
+   - 现场学生参与的活动设计
+5. **配套材料清单**
+   - PPT大纲、学生工作单、教具/器材、软件环境
+6. **演示注意事项**
+   - 技术环境检查清单
+   - 常见问题应对预案
+7. **课后跟进方案**
+   - 体验反馈收集
+   - 后续沟通话术建议

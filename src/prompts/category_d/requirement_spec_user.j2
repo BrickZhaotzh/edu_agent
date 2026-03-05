@@ -1,0 +1,37 @@
+## 需求规格说明书任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入（D1.1 教具需求清单）
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请生成完整的学具/教具需求规格说明书，包含：
+1. **项目概述**：背景、目标、适用学段与课程
+2. **功能需求**：每项学具的功能描述、使用场景、交互方式
+3. **性能指标**：尺寸、材质、精度、耐用性等量化技术参数
+4. **安全要求**：符合的GB标准编号、无毒无害要求、年龄适配
+5. **外观要求**：颜色规范、标识要求、包装规范
+6. **验收标准**：逐项可操作的验收条件与测试方法
+7. **质量保证**：保修期限、售后服务、退换货条件
+8. **附录**：参考标准清单、术语定义
+
+请以正式技术文档格式输出，条目编号清晰。

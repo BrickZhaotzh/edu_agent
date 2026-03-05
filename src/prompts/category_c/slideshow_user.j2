@@ -1,0 +1,17 @@
+## 任务：生成课件内容
+
+**需求描述：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请根据以上信息，生成一份完整的PPT课件内容框架。每页幻灯片包含：页码、标题、要点内容、备注、视觉建议。

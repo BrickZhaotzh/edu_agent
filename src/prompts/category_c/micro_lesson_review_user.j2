@@ -1,0 +1,17 @@
+## 任务：微课内容评审
+
+**待评审内容：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请对以上微课内容进行全面评审，输出评审报告，包含：综合评分、各维度评分及评语（教学设计、内容准确性、视觉呈现、节奏把控、互动设计）、亮点总结、改进建议清单、总体评价。

@@ -1,0 +1,40 @@
+## 说课视频脚本任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请生成说课视频的完整脚本与制作指南，包含：
+1. **说课视频脚本**（按标准说课流程）：
+   - 说教材：教材分析、内容地位与作用
+   - 说学情：学生知识基础、认知特点、学习难点
+   - 说教学目标：知识与技能、过程与方法、情感态度价值观
+   - 说教法学法：教学方法选择与依据
+   - 说教学过程：完整教学环节与时间分配
+   - 说板书设计：板书结构与关键词
+   - 说教学反思：预设反思要点
+2. **分镜提示**：每个环节对应的画面建议
+3. **制作指南**：录制环境、着装仪态、PPT设计、后期剪辑
+4. **时长规划**：各环节时间分配（总时长10-15分钟）
+
+脚本应为可直接朗读的口语化文稿。

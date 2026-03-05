@@ -1,0 +1,28 @@
+## 任务：设计问题链
+
+**课时主题：** {{ input.lesson_topic }}
+
+{% if input.teaching_objectives %}
+**教学目标：**
+{% for obj in input.teaching_objectives %}
+{{ loop.index }}. {{ obj }}
+{% endfor %}
+{% endif %}
+
+{% if input.query %}
+**补充需求：** {{ input.query }}
+{% endif %}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请基于以上信息，设计一条完整的问题链（5-8个问题），覆盖从低阶到高阶的认知层级。每个问题请包含：编号、问题文本、认知层级、设计意图、预期学生回答、教师追问建议。

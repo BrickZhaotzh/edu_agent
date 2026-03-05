@@ -1,0 +1,34 @@
+## 教具需求清单任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请生成完整的教具/学具需求清单，包含：
+1. **材料清单总表**：名称、规格型号、单位数量、单价估算、用途说明
+2. **分课时材料清单**：按课时拆解每节课所需材料
+3. **耗材/非耗材分类**：标注复用次数与消耗速率
+4. **采购优先级**：必备 / 可选 / 可替代，并给出替代方案
+5. **安全注意事项**：涉及安全风险的材料需特别标注
+
+请以结构化表格为主、文字说明为辅的形式呈现。

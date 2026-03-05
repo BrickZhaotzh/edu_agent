@@ -1,0 +1,22 @@
+请基于以下政策参考资料，分析{{ input.province | default('全国', true) }}地区{{ input.subject | default('人工智能', true) }}方向{% if input.grade_range %}（{{ input.grade_range }}）{% endif %}的政策动向：
+
+## 用户需求
+{{ input.query }}
+
+{% if knowledge and knowledge.policies %}
+## 参考政策文档
+{{ knowledge.policies }}
+{% else %}
+## 参考政策文档
+（无相关政策文档，请基于公开政策知识进行分析）
+{% endif %}
+
+{% if upstream %}
+## 上游分析结果
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请输出：
+1. **政策要点摘要**：列出关键政策及核心条款，标注文件名称与发布时间
+2. **课标映射分析**：将政策要求映射到具体课程标准的知识模块和能力要求
+3. **课程适配建议**：基于政策分析给出可落地的课程设计建议，包含主题方向、学时建议、教学形式等

@@ -1,0 +1,36 @@
+## 课标教材匹配任务
+
+### 基本信息
+- **学科**: {{ input.subject }}
+- **年级**: {{ input.grade }}
+{% if input.textbook_version %}
+- **教材版本**: {{ input.textbook_version }}
+{% endif %}
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考（课标/教材原文）
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请输出课标与教材的匹配分析报告，包含：
+1. **课标要求梳理**：列出该学段的课标核心内容要求与学业要求
+2. **教材内容映射**：每个课标条目对应的教材章节/知识点
+3. **匹配度评估**：每项匹配的置信度（高/中/低）及理由
+4. **覆盖缺口分析**：课标要求但教材未充分覆盖的内容
+5. **补充建议**：针对缺口的校本课程或拓展资源建议
+
+请以结构化表格 + 文字分析的形式呈现。

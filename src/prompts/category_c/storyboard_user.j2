@@ -1,0 +1,24 @@
+## 任务：生成分镜脚本
+
+**视频风格：** {{ input.video_style }}
+
+**逐字稿内容（来自C1.3上游）：**
+{{ input.script_content }}
+
+{% if input.query %}
+**补充需求：** {{ input.query }}
+{% endif %}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游管线数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请基于以上逐字稿内容，生成一份完整的视频分镜脚本。每个分镜包含：镜号、时间码、画面描述、旁白/对白、字幕内容、镜头指示、素材/特效需求。

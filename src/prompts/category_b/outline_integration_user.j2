@@ -1,0 +1,46 @@
+## 大纲整合输出任务
+
+### 用户需求
+{{ input.query }}
+
+{% if upstream is defined and upstream %}
+### 上游Agent输出（B1.4 单元细化主题）
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请整合所有单元内容，输出完整的课程大纲文档，包含：
+
+1. **课程封面信息**
+   - 课程名称、适用学段、学科领域、总课时、版本号
+2. **课程前言**
+   - 课程背景、设计理念、使用说明
+3. **课程目标总述**
+   - 核心素养目标、知识与技能目标
+4. **课标对齐总表**
+   - 课标条目与单元的映射矩阵
+5. **完整课程大纲**
+   - 所有单元 → 子主题 → 课时的层级结构
+   - 每个课时的主题、目标、活动类型
+6. **课时分配总表**
+7. **评价体系总述**
+   - 过程性评价方案
+   - 终结性评价方案
+8. **资源需求汇总**
+9. **实施建议**
+   - 教师备课建议、弹性调整空间

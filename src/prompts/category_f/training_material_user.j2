@@ -1,0 +1,35 @@
+## 教师培训材料任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请生成完整的教师培训材料包，包含：
+1. **培训手册**：课程体系概览、教学理念与方法论、各单元教学要点与难点、课堂管理技巧
+2. **教学操作指南**：学具使用说明（分步骤）、软件/平台操作流程、课前准备checklist
+3. **常见问题手册**：教学常见问题Q&A（10-15个）、学具故障排除指南、课堂突发情况处理
+4. **评估工具**：学生学习评估量表、课堂观察记录表、教师自评表
+5. **培训日程安排**：培训时间表与分组活动设计
+6. **考核标准**：培训后考核内容与通过标准
+
+培训材料应实操导向，教师可直接参照使用。

@@ -1,0 +1,17 @@
+## 任务：课程标准分析
+
+**分析需求：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请根据以上需求，进行深度课标分析，输出：课标概述、核心素养解读、内容标准分析（按学段/模块）、学业要求提取、教学建议、评价建议、与其他学科的交叉映射。

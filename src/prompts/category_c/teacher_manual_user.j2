@@ -1,0 +1,17 @@
+## 任务：编写教师指导手册
+
+**需求描述：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请根据以上信息，编写一份完整的教师指导手册，包含课程概述、教学目标解读、教学准备清单、教学实施指南（逐环节）、差异化教学建议、常见问题FAQ、教学资源推荐、课后评价建议。

@@ -1,0 +1,17 @@
+## 任务：构建知识图谱
+
+**需求描述：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请根据以上信息，构建一份课程知识图谱，包含：知识点节点列表（含名称、类型、难度、学段属性）、关系边列表（含包含/前置/相关/对比等类型）、知识图谱概述、学习路径建议。同时输出JSON格式的结构化数据。

@@ -1,0 +1,37 @@
+## 运营文案撰写任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请根据需求场景撰写运营文案，包含以下版本：
+1. **公众号推文版**（如适用）：标题 + 正文（800-1500字），含引导关注与转化
+2. **朋友圈版**（如适用）：精炼文案（100字内）+ 配图建议
+3. **社群通知版**（如适用）：群公告格式，突出关键信息与行动指引
+4. **短信/push版**（如适用）：60字内精炼版本
+
+写作要求：
+- 符合教育行业调性，专业但不刻板
+- 突出家长关心的核心价值
+- 包含明确的行动号召（CTA）
+- 适当使用数据增强说服力

@@ -1,0 +1,322 @@
+# 智能体注册表
+categories:
+  A:
+    name: 课程产品方案
+    description: 课程产品规划与立项阶段的智能体
+    agents:
+      - id: A1.1
+        name: 政策洞察分析
+        priority: P0
+        module: src.agents.category_a.policy_insight
+        class: PolicyInsightAgent
+        description: 多渠道政策检索+课标映射+课程适配建议
+        knowledge: [科创教育专家知识库]
+      - id: A2.1
+        name: 行业竞品调研
+        priority: P0
+        module: src.agents.category_a.competitor_research
+        class: CompetitorResearchAgent
+        description: 竞品信息抓取+结构化对比+差异点提炼
+        knowledge: [competitor_reports]
+      - id: A2.2
+        name: 用户痛点分析
+        priority: P1
+        module: src.agents.category_a.user_pain_point
+        class: UserPainPointAgent
+        description: 调研问卷生成+数据分析+用户画像建模
+      - id: A3.1
+        name: 课程立项书
+        priority: P1
+        module: src.agents.category_a.course_proposal
+        class: CourseProposalAgent
+        description: 商业模式框架+多方案推演+可行性分析
+      - id: A4.1
+        name: Demo课设计
+        priority: P1
+        module: src.agents.category_a.demo_design
+        class: DemoDesignAgent
+        description: 基于优秀课例知识库的课程设计
+      - id: A5.1
+        name: Demo评分模型
+        priority: P2
+        module: src.agents.category_a.demo_scoring
+        class: DemoScoringAgent
+        description: 多维度评分标准+自动评审
+      - id: A6.1
+        name: 生态资源评估
+        priority: P2
+        module: src.agents.category_a.resource_assessment
+        class: ResourceAssessmentAgent
+        description: 资源录入+分类标签+复用性评估
+
+  B:
+    name: 课程方案
+    description: 课程大纲与课时设计阶段的智能体
+    agents:
+      - id: B1.1
+        name: 课程整体规划
+        priority: P1
+        module: src.agents.category_b.course_planning
+        class: CoursePlanningAgent
+        description: 课程整体规划与设计
+      - id: B1.2
+        name: 课标教材匹配
+        priority: P0
+        module: src.agents.category_b.standard_matching
+        class: StandardMatchingAgent
+        description: 课程标准与教材匹配分析
+        pipeline_next: B1.3
+      - id: B1.3
+        name: 单元主题架构
+        priority: P0
+        module: src.agents.category_b.unit_theme
+        class: UnitThemeAgent
+        description: 单元主题架构设计
+        pipeline_next: B1.4
+      - id: B1.4
+        name: 单元细化主题
+        priority: P0
+        module: src.agents.category_b.unit_detail
+        class: UnitDetailAgent
+        description: 单元主题细化与展开
+        pipeline_next: B1.5
+      - id: B1.5
+        name: 大纲整合输出
+        priority: P0
+        module: src.agents.category_b.outline_integration
+        class: OutlineIntegrationAgent
+        description: 课程大纲整合与输出
+        pipeline_next: B2.1
+      - id: B2.1
+        name: 单节课时设计
+        priority: P0
+        module: src.agents.category_b.lesson_design
+        class: LessonDesignAgent
+        description: 单节课时详细设计
+      - id: B2.2
+        name: Demo课交付
+        priority: P3
+        module: src.agents.category_b.demo_delivery
+        class: DemoDeliveryAgent
+        description: Demo课程交付与包装
+
+  C:
+    name: 教研量产
+    description: 课程内容批量生产阶段的智能体
+    agents:
+      - id: C1.1
+        name: 问题链设计
+        priority: P0
+        module: src.agents.category_c.question_chain
+        class: QuestionChainAgent
+        description: 教学问题链设计
+        pipeline_next: C1.3
+      - id: C1.2
+        name: 方案稿撰写
+        priority: P1
+        module: src.agents.category_c.proposal_draft
+        class: ProposalDraftAgent
+        description: 教学方案稿撰写
+      - id: C1.3
+        name: 逐字稿生成
+        priority: P0
+        module: src.agents.category_c.script_gen
+        class: ScriptGenAgent
+        description: 教学逐字稿生成
+        pipeline_next: C1.4
+      - id: C1.4
+        name: 分镜脚本
+        priority: P0
+        module: src.agents.category_c.storyboard
+        class: StoryboardAgent
+        description: 视频分镜脚本生成
+      - id: C1.5
+        name: 课件生成
+        priority: P1
+        module: src.agents.category_c.slideshow
+        class: SlideshowAgent
+        description: PPT课件内容生成
+      - id: C1.6
+        name: 教学设计
+        priority: P1
+        module: src.agents.category_c.teaching_design
+        class: TeachingDesignAgent
+        description: 教学设计方案
+      - id: C1.7
+        name: 学生手册
+        priority: P1
+        module: src.agents.category_c.student_manual
+        class: StudentManualAgent
+        description: 学生活动手册生成
+      - id: C1.8
+        name: 教师手册
+        priority: P1
+        module: src.agents.category_c.teacher_manual
+        class: TeacherManualAgent
+        description: 教师指导手册生成
+      - id: C1.9
+        name: 课后作业
+        priority: P1
+        module: src.agents.category_c.homework
+        class: HomeworkAgent
+        description: 课后作业与练习题生成
+      - id: C1.10
+        name: 评价量规
+        priority: P1
+        module: src.agents.category_c.rubric
+        class: RubricAgent
+        description: 教学评价量规生成
+      - id: C2.1
+        name: 实验PRD
+        priority: P1
+        module: src.agents.category_c.experiment_prd
+        class: ExperimentPRDAgent
+        description: 实验项目需求文档
+      - id: C2.2
+        name: 编程样例
+        priority: P1
+        module: src.agents.category_c.code_example
+        class: CodeExampleAgent
+        description: 编程教学代码样例生成
+      - id: C3.1
+        name: 拼音标注
+        priority: P1
+        module: src.agents.category_c.pinyin_annotator
+        class: PinyinAnnotatorAgent
+        description: 低年级课文拼音标注
+      - id: C3.2
+        name: 教学审核
+        priority: P1
+        module: src.agents.category_c.teaching_review
+        class: TeachingReviewAgent
+        description: 教学内容质量审核
+      - id: C3.3
+        name: 随堂练习
+        priority: P1
+        module: src.agents.category_c.class_exercise
+        class: ClassExerciseAgent
+        description: 随堂练习题生成
+      - id: C3.4
+        name: 微课评审
+        priority: P2
+        module: src.agents.category_c.micro_lesson_review
+        class: MicroLessonReviewAgent
+        description: 微课内容评审
+      - id: C4.1
+        name: 资源上传
+        priority: P3
+        module: src.agents.category_c.resource_upload
+        class: ResourceUploadAgent
+        description: 教学资源自动上传
+      - id: C5.1
+        name: 知识图谱
+        priority: P2
+        module: src.agents.category_c.knowledge_graph
+        class: KnowledgeGraphAgent
+        description: 课程知识图谱构建
+      - id: C5.2
+        name: 课标分析
+        priority: P1
+        module: src.agents.category_c.standard_analysis
+        class: StandardAnalysisAgent
+        description: 课程标准深度分析
+
+  D:
+    name: 学具制作
+    description: 教具学具设计与采购阶段的智能体
+    agents:
+      - id: D1.1
+        name: 教具需求清单
+        priority: P1
+        module: src.agents.category_d.supply_list
+        class: SupplyListAgent
+        description: 教具需求清单生成
+        pipeline_next: D1.5
+      - id: D1.2
+        name: 教具示意图
+        priority: P2
+        module: src.agents.category_d.supply_diagram
+        class: SupplyDiagramAgent
+        description: 教具示意图描述生成
+      - id: D1.5
+        name: 需求规格说明书
+        priority: P1
+        module: src.agents.category_d.requirement_spec
+        class: RequirementSpecAgent
+        description: 学具需求规格说明书
+      - id: D2.1
+        name: 学具寻源
+        priority: P2
+        module: src.agents.category_d.supply_sourcing
+        class: SupplySourcingAgent
+        description: 学具供应商寻源建议
+
+  E:
+    name: 视频制作
+    description: 课程视频制作阶段的智能体
+    agents:
+      - id: E1.1
+        name: 说课视频
+        priority: P2
+        module: src.agents.category_e.lecture_video
+        class: LectureVideoAgent
+        description: 说课视频脚本与制作指引
+      - id: E1.2
+        name: 外包视频制作
+        priority: P1
+        module: src.agents.category_e.outsource_video
+        class: OutsourceVideoAgent
+        description: 外包视频制作需求文档
+      - id: E1.3
+        name: 学具搭建视频
+        priority: P2
+        module: src.agents.category_e.assembly_video
+        class: AssemblyVideoAgent
+        description: 学具搭建视频脚本
+      - id: E1.4
+        name: 语音合成
+        priority: P1
+        module: src.agents.category_e.tts_gen
+        class: TTSGenAgent
+        description: 教学语音合成脚本与配置
+
+  F:
+    name: 课程运营
+    description: 课程上线运营阶段的智能体
+    agents:
+      - id: F1.1
+        name: 宣传海报文案
+        priority: P2
+        module: src.agents.category_f.poster_copy
+        class: PosterCopyAgent
+        description: 课程宣传海报文案
+      - id: F1.2
+        name: 课程介绍页
+        priority: P2
+        module: src.agents.category_f.course_intro
+        class: CourseIntroAgent
+        description: 课程介绍页面内容
+      - id: F1.3
+        name: 培训材料
+        priority: P2
+        module: src.agents.category_f.training_material
+        class: TrainingMaterialAgent
+        description: 师资培训材料生成
+      - id: F1.4
+        name: 运营文案
+        priority: P1
+        module: src.agents.category_f.operation_copy
+        class: OperationCopyAgent
+        description: 日常运营文案生成
+      - id: F2.1
+        name: 满意度调研
+        priority: P1
+        module: src.agents.category_f.satisfaction_survey
+        class: SatisfactionSurveyAgent
+        description: 用户满意度调研问卷与分析
+      - id: F3.1
+        name: FAQ智能答疑
+        priority: P0
+        module: src.agents.category_f.faq_bot
+        class: FAQBotAgent
+        description: 课程FAQ智能问答

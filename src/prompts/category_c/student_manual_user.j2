@@ -1,0 +1,17 @@
+## 任务：编写学生活动手册
+
+**需求描述：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请根据以上信息，编写一份完整的学生活动手册，包含课程名称与主题、学习目标（学生版）、知识卡片、活动指引、操作步骤、思考与讨论、课后挑战、自我评价表。语言要通俗易懂，适合目标学段学生阅读。

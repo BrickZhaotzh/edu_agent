@@ -1,0 +1,32 @@
+## FAQ智能答疑任务
+
+### 用户问题
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### FAQ知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 回答要求
+请基于知识库内容回答用户问题，输出：
+1. **直接回答**：简洁明了地回答核心问题
+2. **详细说明**：必要时提供补充解释或操作步骤
+3. **相关问题推荐**：列出2-3个用户可能感兴趣的相关问题
+4. **未匹配处理**：如知识库中无相关信息，说明情况并引导至人工客服
+
+注意：
+- 语言亲切易懂，适合家长和学生阅读
+- 操作步骤使用编号列表
+- 重要信息加粗标注
+- 涉及安全/退费等敏感问题需引导至官方渠道

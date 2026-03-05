@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.env
+.venv/
+venv/
+*.docx
+*.xlsx
+output/
+data/conversations/
+.streamlit/secrets.toml
+.DS_Store

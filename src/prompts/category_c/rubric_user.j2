@@ -1,0 +1,17 @@
+## 任务：设计评价量规
+
+**需求描述：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请根据以上信息，设计一份完整的评价量规，包含评价维度、权重分配、各等级（优秀/良好/合格/待改进）的具体标准描述，并以表格形式呈现评价矩阵。同时提供学生自评、互评和教师评价的使用说明。

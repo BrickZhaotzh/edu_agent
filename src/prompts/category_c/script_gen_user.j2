@@ -1,0 +1,29 @@
+## 任务：生成逐字稿
+
+**课时主题：** {{ input.lesson_topic }}
+**课时时长：** {{ input.duration_minutes }} 分钟
+
+{% if input.question_chain %}
+**问题链（来自C1.1上游）：**
+{% for q in input.question_chain %}
+{{ loop.index }}. {{ q | tojson }}
+{% endfor %}
+{% endif %}
+
+{% if input.query %}
+**补充需求：** {{ input.query }}
+{% endif %}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游管线数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请基于以上问题链和课时信息，生成一份完整的教师逐字稿。每个环节包含：环节名称、时间段、教师话术、互动设计、教学指令。确保总时长与课时要求匹配。

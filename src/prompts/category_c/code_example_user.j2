@@ -1,0 +1,17 @@
+## 任务：设计编程样例
+
+**需求描述：** {{ input.query }}
+
+{% if input.context %}
+**附加上下文：**
+{% for key, value in input.context.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+**上游数据：**
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+请根据以上信息，设计一份完整的编程教学样例，包含项目名称、适用学段、编程语言/平台、学习目标、完整代码（含详细中文注释）、运行说明、拓展挑战、常见错误提示。

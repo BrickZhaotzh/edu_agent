@@ -1,0 +1,33 @@
+## 课程整体规划任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游数据
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请输出完整的课程整体规划方案，包含以下内容：
+1. **课程概述**：名称、目标学段、学科领域、总课时
+2. **课程目标**：对齐课标的核心素养目标（知识、能力、态度价值观）
+3. **课程大纲**：模块/单元划分，含各模块课时分配
+4. **实施时间线**：学期/学年维度的教学进度建议
+5. **资源需求**：硬件、软件、师资、空间等
+6. **评价方案**：过程性评价 + 终结性评价的框架设计

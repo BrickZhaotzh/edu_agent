@@ -1,0 +1,39 @@
+## 课程介绍页内容任务
+
+### 用户需求
+{{ input.query }}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if upstream is defined and upstream %}
+### 上游输入
+{{ upstream }}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请生成完整的课程介绍页内容，包含以下模块：
+1. **课程头图区文案**：一句话课程定位
+2. **课程亮点**（3-5个亮点，含图标建议+标题+描述）
+3. **课程简介**：200-300字课程概述
+4. **适合人群**：目标学段与学生画像
+5. **课程大纲**：单元/课时列表，每项含主题与简介
+6. **学习成果**：学完后获得的能力/作品/证书
+7. **师资介绍**：师资团队描述模板
+8. **上课方式**：授课形式、时长、班型
+9. **家长常见问题**（FAQ，3-5个）
+10. **报名信息**：价格展示区文案、优惠信息、报名引导
+
+请以家长视角撰写，突出教育价值。

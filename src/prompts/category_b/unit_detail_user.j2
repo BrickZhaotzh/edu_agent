@@ -1,0 +1,43 @@
+## 单元细化主题任务
+
+### 用户需求
+{{ input.query }}
+
+{% if upstream is defined and upstream %}
+### 上游Agent输出（B1.3 单元主题架构）
+{{ upstream | tojson(indent=2) }}
+{% endif %}
+
+{% if input.context %}
+### 附加上下文
+{% for key, value in input.context.items() %}
+- **{{ key }}**: {{ value }}
+{% endfor %}
+{% endif %}
+
+{% if knowledge is defined and knowledge %}
+### 知识库参考
+{% for kb_id, text in knowledge.items() %}
+#### {{ kb_id }}
+{{ text }}
+{% endfor %}
+{% endif %}
+
+### 输出要求
+请对每个单元进行细化展开，每个单元输出以下内容：
+
+1. **单元名称与概述**
+2. **子主题列表**（每个子主题对应1-2课时）
+   - 子主题名称
+   - 核心知识点
+   - 认知层次（Bloom分类）
+   - 建议教学策略
+3. **课时安排表**
+   - 课时编号、主题、活动类型、时长
+4. **关键学习活动**
+   - 活动名称、目标、学生任务、教师角色
+5. **评价任务**
+   - 过程性评价点
+   - 单元终结性评价建议
+6. **资源清单**
+   - 硬件/软件/素材需求
