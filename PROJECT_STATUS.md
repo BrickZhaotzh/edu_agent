@@ -1,6 +1,6 @@
 # 科创课程AI智能体平台 — 项目进度总结
 
-> 更新时间：2026-03-05
+> 更新时间：2026-03-05（第二次更新）
 
 ---
 
@@ -14,7 +14,7 @@
 
 | 模块 | 状态 | 数量 |
 |------|------|------|
-| 核心基础设施 (src/core/) | ✅ 已完成 | 6个模块 |
+| 核心基础设施 (src/core/) | ✅ 已完成 | 9个模块 |
 | Agent 基类 | ✅ 已完成 | 1个 |
 | A类 智能体 | ✅ 已完成 | 7个 |
 | B类 智能体 | ✅ 已完成 | 7个 |
@@ -23,12 +23,17 @@
 | E类 智能体 | ✅ 已完成 | 4个 |
 | F类 智能体 | ✅ 已完成 | 6个 |
 | Jinja2 提示词模板 | ✅ 已完成 | 94个（每个Agent 2个） |
-| Streamlit 页面 | ✅ 已完成 | 47+1（含首页仪表盘） |
+| Streamlit 页面 | ✅ 已完成 | 47+3（首页+工作流+知识库管理） |
 | Claude Code Skills | ✅ 已完成 | 47个 .md 文件 |
-| 知识库链接 | ✅ 已完成 | 2个（政策+竞品） |
+| 知识库链接 | ✅ 已完成 | 2个本地 + 云端知识库管理 |
+| 对话持久化 | ✅ 已完成 | JSON 多对话存储 + 侧边栏管理 |
+| 工作流编排引擎 | ✅ 已完成 | DAG 拓扑排序 + 流式执行 |
+| 云端知识库管理 | ✅ 已完成 | 智谱 AI 知识库 CRUD + RAG 检索 |
+| 参数设置面板 | ✅ 已完成 | 可折叠配置面板 + Skill 编辑器 |
+| 文档导出组件 | ✅ 已完成 | Markdown/Word 导出 + 多文件下载 |
 | 端到端 API 验证 | ✅ 已通过 | A1.1 同步 + A2.1 流式 |
 
-**文件统计**：94 模板 + 47 Agent + 48 页面 + 47 Skill + 6 Core = **242 个核心文件**
+**文件统计**：94 模板 + 47 Agent + 50 页面 + 47 Skill + 9 Core = **247 个核心文件**
 
 ---
 
@@ -41,12 +46,17 @@ kechuang-ai-agents/
 │   ├── settings.yaml             # 全局配置（模型/知识库/导出/UI）
 │   └── agent_registry.yaml       # 47个智能体注册表（ID/名称/优先级/模块/管线依赖）
 ├── src/
-│   ├── core/                     # 共享基础设施
+│   ├── core/                     # 共享基础设施（9个模块）
 │   │   ├── config.py             # YAML + .env 配置加载（Settings 单例）
 │   │   ├── models.py             # 所有 Agent 的 Pydantic 输入/输出模型
 │   │   ├── llm_client.py         # GLM-4.7 客户端（同步/流式/工具调用）
 │   │   ├── prompt_engine.py      # Jinja2 模板渲染引擎
 │   │   ├── knowledge_base.py     # 本地知识库加载与关键词检索
+│   │   ├── cloud_knowledge.py    # 云端知识库管理（智谱AI RAG）
+│   │   ├── chat_storage.py       # 对话持久化（JSON文件存储）
+│   │   ├── workflow_engine.py    # 工作流 DAG 执行引擎
+│   │   ├── workflow_models.py    # 工作流数据模型
+│   │   ├── workflow_storage.py   # 工作流持久化
 │   │   └── document_gen.py       # 文档导出（MD/DOCX/XLSX）
 │   ├── agents/
 │   │   ├── base_agent.py         # 抽象基类（run/run_stream/export）
@@ -69,11 +79,14 @@ kechuang-ai-agents/
 ├── app/                          # Streamlit 多页面应用
 │   ├── app.py                    # 主入口（st.navigation 六大类导航）
 │   ├── components/
-│   │   ├── chat_interface.py     # 对话式交互界面（流式输出+错误处理）
-│   │   ├── document_viewer.py    # 文档预览
-│   │   └── file_downloader.py    # 文件下载
-│   └── pages/                    # 48个页面（含 home.py 仪表盘）
-│       ├── home.py
+│   │   ├── chat_interface.py     # 对话式交互界面（流式+持久化+设置面板+Skill编辑）
+│   │   ├── workflow_canvas.py    # 工作流可视化画布
+│   │   ├── document_viewer.py    # 文档双模式预览（渲染+源码）
+│   │   └── file_downloader.py    # 多文件下载（自动MIME检测）
+│   └── pages/                    # 50个页面
+│       ├── home.py               # 首页仪表盘
+│       ├── workflow_builder.py   # 工作流编排器（DAG可视化+执行）
+│       ├── admin_knowledge.py    # 云端知识库管理后台
 │       ├── category_a/           # 7个页面
 │       ├── category_b/           # 7个页面
 │       ├── category_c/           # 19个页面
@@ -234,7 +247,48 @@ env -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY \
 
 ---
 
-## 八、后续待办
+## 八、近期新增功能（03-05）
+
+### 8.1 对话持久化 & 多对话管理
+
+- **chat_storage.py**: JSON 文件存储，路径 `data/conversations/{agent_id}/conv_YYYYMMDD_HHmmss.json`
+- **侧边栏对话面板**: 每个 Agent 页面底部显示「➕ 新建对话」+ 历史对话列表 + 🗑 删除
+- 自动保存：助手回复后立即持久化；切换对话时自动保存当前对话
+- 自动标题：从用户首条消息截取前 20 字作为对话标题
+- 导航标题气泡：侧边栏 Agent 名称后显示对话计数 `(3)`
+
+### 8.2 工作流编排引擎
+
+- **workflow_models.py**: WorkflowNode / WorkflowEdge / WorkflowDefinition 数据模型
+- **workflow_engine.py**: DAG 执行引擎 — Kahn 拓扑排序、环检测、流式执行、上游数据自动合并、错误隔离（上游失败→下游跳过）
+- **workflow_storage.py**: 工作流 JSON 持久化
+- **workflow_builder.py 页面**: 可视化编排 UI — Agent 选择面板、预设管线、节点编辑器、全局 Query 输入、逐节点流式执行进度
+
+### 8.3 云端知识库管理
+
+- **cloud_knowledge.py**: 对接智谱 AI 知识库 API — KB CRUD、文档上传（doc/pdf/xlsx/txt/md, ≤50MB）、RAG retrieval tool 构建
+- **admin_knowledge.py 页面**: 管理后台 — 知识库列表/创建/文档上传/映射配置
+- **Agent 集成**: base_agent.py 自动从 agent_registry + 用户输入获取 knowledge_ids，构建 retrieval tools
+
+### 8.4 参数设置面板 & Skill 编辑器
+
+- **可折叠设置面板**: ⚙️ 按钮切换显示/隐藏，支持 text/textarea/select/multiselect/number/slider 字段类型
+- **Skill 查看/编辑**: 读取 `/skills/kc-{id}-.md` 默认 Skill，支持自定义编辑并保存到 `/data/custom_skills/`，可一键重置
+- **知识库选择器**: 设置面板内选择云端知识库（从配置自动填充）
+
+### 8.5 文档预览与导出
+
+- **document_viewer.py**: 双模式预览（渲染视图 + Markdown 源码），结构化数据表格显示
+- **file_downloader.py**: 单文件/多文件下载按钮，自动 MIME 类型检测
+
+### 8.6 GitHub 仓库
+
+- **地址**: https://github.com/BrickZhaotzh/edu_agent
+- **首次提交**: 281 文件，19034 行代码
+
+---
+
+## 十、后续待办
 
 ### 优先级 P0（建议优先处理）
 
@@ -257,7 +311,7 @@ env -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY \
 
 ---
 
-## 九、快速启动
+## 十一、快速启动
 
 ```bash
 # 1. 安装依赖
@@ -277,7 +331,7 @@ open http://localhost:8501
 
 ---
 
-## 十、依赖版本
+## 十二、依赖版本
 
 ```
 zhipuai>=2.1.0        # GLM-4.7 SDK
